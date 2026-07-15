@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dott.ssa Angela Parola | Oftalmologia Veterinaria</title>
-  <meta name="description" content="Oftalmologia veterinaria clinica e chirurgica. Consulenze specialistiche per strutture veterinarie in provincia di Napoli, Caserta, Benevento e Avellino." />
+  <meta name="description" content="Oftalmologia veterinaria clinica e chirurgica. Appuntamenti e attività specialistica presso strutture veterinarie in provincia di Napoli, Caserta, Benevento e Avellino." />
   <meta name="theme-color" content="#071f2b" />
   <meta property="og:title" content="Dott.ssa Angela Parola | Oftalmologia Veterinaria" />
   <meta property="og:description" content="Competenza specialistica in oftalmologia veterinaria clinica e chirurgica." />
@@ -47,7 +47,7 @@
         <a href="#percorso">Metodo</a>
         <a href="#territorio">Territorio</a>
         <a href="lavori.html">I nostri lavori</a>
-        <a class="nav-cta" href="#contatti">Contatti</a>
+        <a class="nav-cta" href="appuntamento.html">Fissa un appuntamento</a>
       </div>
     </nav>
   </header>
@@ -60,8 +60,8 @@
           <h1>Precisione specialistica per la salute degli occhi degli animali.</h1>
           <p class="lead">La Dott.ssa Angela Parola affianca strutture veterinarie e proprietari nella diagnosi, nel trattamento e nel follow-up dei pazienti con problematiche oculari, con attività clinica e chirurgica nelle province di Napoli, Caserta, Benevento e Avellino.</p>
           <div class="hero-actions">
-            <a class="btn primary" href="#contatti">Richiedi una consulenza</a>
-            <a class="btn ghost" href="#attivita">Aree di attività</a>
+            <a class="btn primary" href="appuntamento.html">Fissa un appuntamento</a>
+            <a class="btn ghost" href="#territorio">Scegli una struttura</a>
             <a class="btn soft-btn" href="lavori.html">I nostri lavori</a>
           </div>
           <div class="hero-strip" aria-label="Sintesi servizi">
@@ -86,7 +86,7 @@
                 <span>Specialist referral</span>
                 <strong>Oftalmologia Veterinaria</strong>
               </div>
-              <div class="status-pill">Consulenze</div>
+              <div class="status-pill">Appuntamenti</div>
             </div>
           </div>
           <div class="floating-card fc-1"><strong>Diagnosi</strong><span>visita · valutazione · follow-up</span></div>
@@ -201,26 +201,175 @@
     </section>
 
     <section class="section-pad soft" id="territorio">
-      <div class="container territory-wrap">
-        <div>
-          <div class="section-heading reveal">
-            <p class="eyebrow">Territorio</p>
-            <h2>Attività specialistica in rete con strutture veterinarie campane.</h2>
-            <p>La presenza sul territorio viene comunicata in modo chiaro e premium, utile sia per l’utente finale sia per la struttura veterinaria che cerca una collaborazione.</p>
+      <div class="container structures-shell">
+        <div class="structures-heading reveal">
+          <div>
+            <p class="eyebrow">Strutture di riferimento</p>
+            <h2>Trova la struttura più comoda e fissa l’appuntamento.</h2>
+            <p>La Dott.ssa Angela Parola svolge attività specialistica presso strutture veterinarie distribuite nelle province di Napoli, Caserta, Avellino e Benevento.</p>
           </div>
-          <div class="territory-grid">
-            <div class="territory-card reveal"><strong>Napoli</strong><span>Consulenze e supporto specialistico</span></div>
-            <div class="territory-card reveal delay-1"><strong>Caserta</strong><span>Collaborazione con strutture veterinarie</span></div>
-            <div class="territory-card reveal delay-2"><strong>Benevento</strong><span>Attività oftalmologica clinica</span></div>
-            <div class="territory-card reveal delay-3"><strong>Avellino</strong><span>Gestione casi e follow-up</span></div>
+          <div class="network-summary" aria-label="Riepilogo rete strutture">
+            <div><strong>18</strong><span>strutture</span></div>
+            <div><strong>4</strong><span>province</span></div>
+            <a href="appuntamento.html">Fissa un appuntamento</a>
           </div>
         </div>
-        <aside class="map-card reveal delay-1">
-          <p class="eyebrow light">Copertura</p>
-          <h3>Napoli · Caserta · Benevento · Avellino</h3>
-          <p>Un network operativo per gestire consulenze, valutazioni e follow-up in collaborazione con strutture veterinarie del territorio.</p>
-          <div class="map-points"><span>NA</span><span>CE</span><span>BN</span><span>AV</span><span>CVS Roma</span></div>
-        </aside>
+
+        <div class="structures-browser reveal delay-1" >
+          <div class="province-tabs" role="tablist" aria-label="Filtra strutture per provincia">
+            <button class="province-tab active" type="button" data-province-filter="napoli" role="tab" aria-selected="true">Napoli <span>10</span></button>
+            <button class="province-tab" type="button" data-province-filter="caserta" role="tab" aria-selected="false">Caserta <span>6</span></button>
+            <button class="province-tab" type="button" data-province-filter="avellino" role="tab" aria-selected="false">Avellino <span>1</span></button>
+            <button class="province-tab" type="button" data-province-filter="benevento" role="tab" aria-selected="false">Benevento <span>1</span></button>
+          </div>
+          <div class="structures-list" id="structuresList" data-no-snap aria-live="polite">
+            <article class="structure-card" data-province="napoli">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>La Clinica Veterinaria S.C.A.R.L.</strong>
+                <span>Casalnuovo di Napoli</span>
+              </div>
+              <a href="appuntamento.html?struttura=La%20Clinica%20Veterinaria%20S.C.A.R.L.&provincia=Napoli" aria-label="Fissa un appuntamento presso La Clinica Veterinaria S.C.A.R.L.">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="napoli">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Ambulatorio Veterinario Dott.sse Cervo e De Leone</strong>
+                <span>Casalnuovo di Napoli</span>
+              </div>
+              <a href="appuntamento.html?struttura=Ambulatorio%20Veterinario%20Dott.sse%20Cervo%20e%20De%20Leone&provincia=Napoli" aria-label="Fissa un appuntamento presso Ambulatorio Veterinario Dott.sse Cervo e De Leone">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="napoli">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Centro Veterinario Vesuviano</strong>
+                <span>Ercolano</span>
+              </div>
+              <a href="appuntamento.html?struttura=Centro%20Veterinario%20Vesuviano&provincia=Napoli" aria-label="Fissa un appuntamento presso Centro Veterinario Vesuviano">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="napoli">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Ambulatorio Veterinario Simba</strong>
+                <span>San Giorgio a Cremano</span>
+              </div>
+              <a href="appuntamento.html?struttura=Ambulatorio%20Veterinario%20Simba&provincia=Napoli" aria-label="Fissa un appuntamento presso Ambulatorio Veterinario Simba">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="napoli">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Le Vet</strong>
+                <span>Boscotrecase</span>
+              </div>
+              <a href="appuntamento.html?struttura=Le%20Vet&provincia=Napoli" aria-label="Fissa un appuntamento presso Le Vet">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="napoli">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Ambulatorio Veterinario Dott. Piscopo</strong>
+                <span>Arzano</span>
+              </div>
+              <a href="appuntamento.html?struttura=Ambulatorio%20Veterinario%20Dott.%20Piscopo&provincia=Napoli" aria-label="Fissa un appuntamento presso Ambulatorio Veterinario Dott. Piscopo">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="napoli">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Ambulatorio Veterinario Dott. Simioli</strong>
+                <span>Giugliano in Campania</span>
+              </div>
+              <a href="appuntamento.html?struttura=Ambulatorio%20Veterinario%20Dott.%20Simioli&provincia=Napoli" aria-label="Fissa un appuntamento presso Ambulatorio Veterinario Dott. Simioli">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="napoli">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Family Vet</strong>
+                <span>Frattaminore</span>
+              </div>
+              <a href="appuntamento.html?struttura=Family%20Vet&provincia=Napoli" aria-label="Fissa un appuntamento presso Family Vet">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="napoli">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Nanà</strong>
+                <span>Mugnano di Napoli</span>
+              </div>
+              <a href="appuntamento.html?struttura=Nan%C3%A0&provincia=Napoli" aria-label="Fissa un appuntamento presso Nanà">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="napoli">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Ambulatorio Veterinario Dott. Perrino</strong>
+                <span>Villaricca</span>
+              </div>
+              <a href="appuntamento.html?struttura=Ambulatorio%20Veterinario%20Dott.%20Perrino&provincia=Napoli" aria-label="Fissa un appuntamento presso Ambulatorio Veterinario Dott. Perrino">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="caserta">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Clinica Veterinaria Animalia</strong>
+                <span>Aversa</span>
+              </div>
+              <a href="appuntamento.html?struttura=Clinica%20Veterinaria%20Animalia&provincia=Caserta" aria-label="Fissa un appuntamento presso Clinica Veterinaria Animalia">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="caserta">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Global Veterinaria</strong>
+                <span>Aversa</span>
+              </div>
+              <a href="appuntamento.html?struttura=Global%20Veterinaria&provincia=Caserta" aria-label="Fissa un appuntamento presso Global Veterinaria">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="caserta">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Veter Center</strong>
+                <span>Santa Maria Capua Vetere</span>
+              </div>
+              <a href="appuntamento.html?struttura=Veter%20Center&provincia=Caserta" aria-label="Fissa un appuntamento presso Veter Center">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="caserta">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Vi Ma Vet</strong>
+                <span>Capua</span>
+              </div>
+              <a href="appuntamento.html?struttura=Vi%20Ma%20Vet&provincia=Caserta" aria-label="Fissa un appuntamento presso Vi Ma Vet">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="caserta">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Vet &amp; Pets</strong>
+                <span>Castel Volturno</span>
+              </div>
+              <a href="appuntamento.html?struttura=Vet%20%26%20Pets&provincia=Caserta" aria-label="Fissa un appuntamento presso Vet &amp; Pets">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="caserta">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Ambulatorio Veterinario Dott. Fusco e De Tommaso</strong>
+                <span>Caserta</span>
+              </div>
+              <a href="appuntamento.html?struttura=Ambulatorio%20Veterinario%20Dott.%20Fusco%20e%20De%20Tommaso&provincia=Caserta" aria-label="Fissa un appuntamento presso Ambulatorio Veterinario Dott. Fusco e De Tommaso">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="avellino">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Ambulatorio Veterinario Dott. Zotti</strong>
+                <span>Ariano Irpino</span>
+              </div>
+              <a href="appuntamento.html?struttura=Ambulatorio%20Veterinario%20Dott.%20Zotti&provincia=Avellino" aria-label="Fissa un appuntamento presso Ambulatorio Veterinario Dott. Zotti">Fissa qui</a>
+            </article>
+            <article class="structure-card" data-province="benevento">
+              <div class="structure-icon" aria-hidden="true">✦</div>
+              <div class="structure-copy">
+                <strong>Clinica Veterinaria Sannio</strong>
+                <span>Benevento</span>
+              </div>
+              <a href="appuntamento.html?struttura=Clinica%20Veterinaria%20Sannio&provincia=Benevento" aria-label="Fissa un appuntamento presso Clinica Veterinaria Sannio">Fissa qui</a>
+            </article>
+          </div>
+        </div>
+        <p class="structures-note reveal">Seleziona una struttura per precompilare automaticamente il modulo di appuntamento. La disponibilità viene sempre confermata direttamente dalla Dott.ssa Angela Parola.</p>
       </div>
     </section>
 
@@ -247,7 +396,7 @@
           <p>Uno spazio dedicato a immagini cliniche, procedure e controlli, presentati con descrizioni sobrie e professionali.</p>
           <div class="works-actions">
             <a class="btn primary" href="lavori.html">Apri la gallery</a>
-            <a class="btn ghost" href="https://wa.me/393467762594?text=Buongiorno%2C%20vorrei%20informazioni%20per%20una%20consulenza%20oftalmologica%20veterinaria." target="_blank" rel="noopener">Contatta su WhatsApp</a>
+            <a class="btn ghost" href="appuntamento.html">Fissa un appuntamento</a>
           </div>
         </div>
         <div class="works-preview-grid" aria-label="Anteprima sezione lavori">
@@ -266,7 +415,7 @@
           <p>Risposte sintetiche per capire quando richiedere una valutazione e come avviare il percorso.</p>
         </div>
         <div class="faq-list reveal delay-1">
-          <details open><summary>Come si richiede una consulenza?</summary><p>È possibile inviare una richiesta tramite il modulo WhatsApp oppure chiamare il numero ufficiale. La consulenza può essere coordinata anche tramite la struttura veterinaria di riferimento.</p></details>
+          <details open><summary>Come si fissa un appuntamento?</summary><p>Apri la pagina “Fissa un appuntamento”, seleziona la struttura preferita e compila i dati richiesti. Al termine verrà preparato automaticamente un messaggio WhatsApp completo da inviare.</p></details>
           <details><summary>In quali province opera?</summary><p>L’attività è svolta come referente di diverse strutture nelle province di Napoli, Caserta, Benevento e Avellino.</p></details>
           <details><summary>La sezione “I nostri lavori” può mostrare interventi reali?</summary><p>Sì, purché le immagini siano autorizzate, prive di dati sensibili e accompagnate da descrizioni sobrie e professionali.</p></details>
           <details><summary>Quando non conviene aspettare?</summary><p>In presenza di dolore, occhio chiuso, trauma, opacità improvvisa, secrezioni importanti o riduzione della vista, è meglio richiedere rapidamente una valutazione.</p></details>
@@ -275,27 +424,26 @@
     </section>
 
     <section class="cta-section" id="contatti">
-      <div class="container cta-card reveal">
+      <div class="container appointment-cta reveal">
         <div>
-          <p class="eyebrow light">Consulenze specialistiche</p>
-          <h2>Hai un caso oftalmologico da valutare?</h2>
-          <p>Per appuntamenti e consulenze, è possibile coordinarsi con la struttura veterinaria di riferimento oppure inviare una richiesta diretta tramite WhatsApp al numero ufficiale.</p>
+          <p class="eyebrow light">Prenotazione guidata</p>
+          <h2>Fissa un appuntamento in pochi passaggi.</h2>
+          <p>Scegli la struttura più comoda, inserisci i dati del paziente e descrivi brevemente il problema. Il sito preparerà un messaggio ordinato da inviare direttamente su WhatsApp.</p>
           <div class="contact-points">
             <span>Telefono diretto: +39 346 776 2594</span>
             <span>Email: <a href="mailto:angela.parola@libero.it">angela.parola@libero.it</a></span>
-            <span>Province: Napoli, Caserta, Benevento, Avellino</span>
-            <span>Attività clinica e chirurgica specialistica</span>
+            <span>18 strutture tra Napoli, Caserta, Avellino e Benevento</span>
           </div>
         </div>
-        <form class="contact-form" id="contactForm">
-          <label>Nome e cognome<input type="text" name="name" placeholder="Es. Mario Rossi" required /></label>
-          <label>Telefono<input type="tel" name="phone" placeholder="Es. 333 000 0000" required /></label>
-          <label>Messaggio<textarea name="message" rows="4" placeholder="Descrivi brevemente il caso o la richiesta"></textarea></label>
-          <button class="btn primary inverted" type="submit">Invia richiesta su WhatsApp</button>
-          <a class="direct-phone" href="tel:+393467762594">Chiama ora: +39 346 776 2594</a>
-          <a class="direct-email" href="mailto:angela.parola@libero.it">Email: angela.parola@libero.it</a>
-          <small>La richiesta viene preparata su WhatsApp con i dati inseriti nel modulo.</small>
-        </form>
+        <div class="appointment-cta-card">
+          <span class="appointment-step">01</span>
+          <strong>Scegli la struttura</strong>
+          <span class="appointment-step">02</span>
+          <strong>Compila il modulo</strong>
+          <span class="appointment-step">03</span>
+          <strong>Invia tutto su WhatsApp</strong>
+          <a class="btn primary inverted" href="appuntamento.html">Fissa un appuntamento</a>
+        </div>
       </div>
     </section>
   </main>
@@ -313,6 +461,7 @@
         <a href="#attivita">Attività</a>
         <a href="#percorso">Metodo</a>
         <a href="lavori.html">I nostri lavori</a>
+        <a href="appuntamento.html">Fissa un appuntamento</a>
       </div>
       <div>
         <strong>Contatti</strong>
@@ -331,7 +480,7 @@
     </div>
   </footer>
 
-  <a class="floating-whatsapp" href="https://wa.me/393467762594?text=Buongiorno%2C%20vorrei%20informazioni%20per%20una%20consulenza%20oftalmologica%20veterinaria." target="_blank" rel="noopener">WhatsApp</a>
+  <a class="floating-whatsapp" href="https://wa.me/393467762594?text=Buongiorno%2C%20vorrei%20fissare%20un%20appuntamento%20di%20oftalmologia%20veterinaria." target="_blank" rel="noopener">WhatsApp</a>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="assets/script.js"></script>
 </body>

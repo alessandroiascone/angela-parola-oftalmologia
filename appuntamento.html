@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fissa un appuntamento | Dott.ssa Angela Parola</title>
+  <meta name="description" content="Compila il modulo per richiedere un appuntamento di oftalmologia veterinaria con la Dott.ssa Angela Parola presso una delle strutture di riferimento." />
+  <meta name="theme-color" content="#071f2b" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body class="no-snap appointment-page">
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Navigazione principale">
+      <a class="brand" href="index.html#top" aria-label="Homepage Dott.ssa Angela Parola">
+        <span class="brand-mark"><img src="assets/logo-angela-parola.webp" alt="Logo occhio Oftalmologia Veterinaria" /></span>
+        <span class="brand-copy"><strong>Dott.ssa Angela Parola</strong><small>Oftalmologia Veterinaria</small></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span><em>Menu</em></button>
+      <div class="nav-menu" id="nav-menu">
+        <a href="index.html#specialista">Profilo</a>
+        <a href="index.html#attivita">Attività</a>
+        <a href="index.html#territorio">Strutture</a>
+        <a href="lavori.html">I nostri lavori</a>
+        <a class="nav-cta" href="appuntamento.html" aria-current="page">Fissa un appuntamento</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="appointment-hero">
+      <div class="container appointment-layout">
+        <div class="appointment-intro reveal">
+          <p class="eyebrow">Prenotazione guidata</p>
+          <h1>Fissa un appuntamento.</h1>
+          <p class="lead">Compila il modulo con i dati del proprietario, del paziente e della struttura preferita. Al termine verrà aperto WhatsApp con un riepilogo già pronto da inviare.</p>
+          <div class="appointment-benefits">
+            <div><span>01</span><strong>Scegli la struttura</strong><small>18 sedi in 4 province</small></div>
+            <div><span>02</span><strong>Descrivi il caso</strong><small>Poche informazioni, ma utili</small></div>
+            <div><span>03</span><strong>Invia su WhatsApp</strong><small>Conferma rapida e ordinata</small></div>
+          </div>
+          <div class="appointment-alert">
+            <strong>Attenzione</strong>
+            <p>Il modulo non sostituisce una visita né un servizio di emergenza. In caso di trauma grave, dolore intenso o peggioramento improvviso, contatta subito la struttura veterinaria più vicina.</p>
+          </div>
+        </div>
+
+        <form class="appointment-form reveal delay-1" id="appointmentForm" data-no-snap>
+          <div class="form-heading">
+            <span>Richiesta appuntamento</span>
+            <h2>Dati del proprietario e del paziente</h2>
+          </div>
+          <div class="form-grid">
+            <label>Nome e cognome*
+              <input type="text" name="name" autocomplete="name" placeholder="Es. Mario Rossi" required />
+            </label>
+            <label>Telefono*
+              <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Es. 333 000 0000" required />
+            </label>
+            <label>Email
+              <input type="email" name="email" autocomplete="email" placeholder="nome@email.it" />
+            </label>
+            <label>Nome dell’animale*
+              <input type="text" name="petName" placeholder="Es. Luna" required />
+            </label>
+            <label>Tipo di animale*
+              <select name="petType" required>
+                <option value="">Seleziona</option>
+                <option>Cane</option><option>Gatto</option><option>Coniglio</option><option>Altro</option>
+              </select>
+            </label>
+            <label>Provincia preferita*
+              <select name="province" id="provinceSelect" required>
+                <option value="">Seleziona</option>
+                <option>Napoli</option><option>Caserta</option><option>Avellino</option><option>Benevento</option>
+              </select>
+            </label>
+            <label class="form-span-2">Struttura preferita*
+              <select name="structure" id="structureSelect" required>
+                <option value="">Seleziona una struttura</option>
+<optgroup label="Napoli">
+  <option value="La Clinica Veterinaria S.C.A.R.L." data-province="Napoli">La Clinica Veterinaria S.C.A.R.L. — Casalnuovo di Napoli</option>
+  <option value="Ambulatorio Veterinario Dott.sse Cervo e De Leone" data-province="Napoli">Ambulatorio Veterinario Dott.sse Cervo e De Leone — Casalnuovo di Napoli</option>
+  <option value="Centro Veterinario Vesuviano" data-province="Napoli">Centro Veterinario Vesuviano — Ercolano</option>
+  <option value="Ambulatorio Veterinario Simba" data-province="Napoli">Ambulatorio Veterinario Simba — San Giorgio a Cremano</option>
+  <option value="Le Vet" data-province="Napoli">Le Vet — Boscotrecase</option>
+  <option value="Ambulatorio Veterinario Dott. Piscopo" data-province="Napoli">Ambulatorio Veterinario Dott. Piscopo — Arzano</option>
+  <option value="Ambulatorio Veterinario Dott. Simioli" data-province="Napoli">Ambulatorio Veterinario Dott. Simioli — Giugliano in Campania</option>
+  <option value="Family Vet" data-province="Napoli">Family Vet — Frattaminore</option>
+  <option value="Nanà" data-province="Napoli">Nanà — Mugnano di Napoli</option>
+  <option value="Ambulatorio Veterinario Dott. Perrino" data-province="Napoli">Ambulatorio Veterinario Dott. Perrino — Villaricca</option>
+</optgroup>
+<optgroup label="Caserta">
+  <option value="Clinica Veterinaria Animalia" data-province="Caserta">Clinica Veterinaria Animalia — Aversa</option>
+  <option value="Global Veterinaria" data-province="Caserta">Global Veterinaria — Aversa</option>
+  <option value="Veter Center" data-province="Caserta">Veter Center — Santa Maria Capua Vetere</option>
+  <option value="Vi Ma Vet" data-province="Caserta">Vi Ma Vet — Capua</option>
+  <option value="Vet &amp; Pets" data-province="Caserta">Vet &amp; Pets — Castel Volturno</option>
+  <option value="Ambulatorio Veterinario Dott. Fusco e De Tommaso" data-province="Caserta">Ambulatorio Veterinario Dott. Fusco e De Tommaso — Caserta</option>
+</optgroup>
+<optgroup label="Avellino">
+  <option value="Ambulatorio Veterinario Dott. Zotti" data-province="Avellino">Ambulatorio Veterinario Dott. Zotti — Ariano Irpino</option>
+</optgroup>
+<optgroup label="Benevento">
+  <option value="Clinica Veterinaria Sannio" data-province="Benevento">Clinica Veterinaria Sannio — Benevento</option>
+</optgroup>
+              </select>
+            </label>
+            <label class="form-span-2">Descrivi brevemente sintomi o richiesta*
+              <textarea name="message" rows="5" placeholder="Es. occhio rosso, lacrimazione, dolore, trauma, controllo post-operatorio…" required></textarea>
+            </label>
+          </div>
+          <label class="privacy-check">
+            <input type="checkbox" name="privacy" required />
+            <span>Ho letto la <a href="privacy.html" target="_blank">Privacy Policy</a> e autorizzo l’uso dei dati per gestire la richiesta di appuntamento.*</span>
+          </label>
+          <button class="btn primary appointment-submit" type="submit">Prepara e invia su WhatsApp</button>
+          <p class="form-microcopy">L’appuntamento sarà effettivo solo dopo la conferma ricevuta su WhatsApp.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer appointment-footer">
+    <div class="container appointment-footer-row">
+      <div><strong>Dott.ssa Angela Parola</strong><span>Oftalmologia Veterinaria</span></div>
+      <a href="tel:+393467762594">+39 346 776 2594</a>
+      <a href="mailto:angela.parola@libero.it">angela.parola@libero.it</a>
+      <a href="index.html#territorio">Consulta le strutture</a>
+    </div>
+    <div class="container powered-by" aria-label="Crediti sito"><p>Powered by <strong>Re Long Informatica</strong></p></div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="assets/script.js"></script>
+</body>
+</html>

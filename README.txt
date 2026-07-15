@@ -2,6 +2,7 @@ SITO WEB - DOTT.SSA ANGELA PAROLA | OFTALMOLOGIA VETERINARIA
 
 File principali:
 - index.html: homepage completa one-page premium.
+- appuntamento.html: modulo guidato per fissare un appuntamento e inviare il riepilogo su WhatsApp.
 - privacy.html: base privacy da personalizzare prima della pubblicazione.
 - assets/style.css: grafica responsive, animazioni e layout.
 - assets/script.js: menu mobile, animazioni e modulo contatti.

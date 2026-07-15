@@ -1,7 +1,8 @@
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('#nav-menu');
 const toast = document.querySelector('#toast');
-const form = document.querySelector('#contactForm');
+const contactForm = document.querySelector('#contactForm');
+const appointmentForm = document.querySelector('#appointmentForm');
 const year = document.querySelector('#year');
 
 const CONTACT_EMAIL = 'angela.parola@libero.it';
@@ -10,8 +11,8 @@ const WHATSAPP_NUMBER = '393467762594';
 if (year) year.textContent = new Date().getFullYear();
 
 navToggle?.addEventListener('click', () => {
-  const open = navMenu.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', String(open));
+  const open = navMenu?.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', String(Boolean(open)));
 });
 
 document.querySelectorAll('.nav-menu a').forEach(link => {
@@ -39,7 +40,7 @@ if ('IntersectionObserver' in window) {
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.10 });
   revealElements.forEach(el => revealObserver.observe(el));
 } else {
   revealElements.forEach(el => el.classList.add('is-visible'));
@@ -53,35 +54,113 @@ function showToast(message){
   window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 5200);
 }
 
-form?.addEventListener('submit', (event) => {
+contactForm?.addEventListener('submit', (event) => {
   event.preventDefault();
-  const data = new FormData(form);
+  const data = new FormData(contactForm);
   const name = (data.get('name') || '').toString().trim();
   const phone = (data.get('phone') || '').toString().trim();
   const message = (data.get('message') || '').toString().trim();
-  const text = `Richiesta consulenza oftalmologica\n\nNome: ${name}\nTelefono: ${phone}\nMessaggio: ${message}`;
-
-  if (WHATSAPP_NUMBER) {
-    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-    return;
-  }
-  if (CONTACT_EMAIL) {
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=Richiesta consulenza oftalmologica&body=${encodeURIComponent(text)}`;
-    return;
-  }
-  showToast('Modulo pronto. Puoi inviarlo tramite WhatsApp o via email ufficiale.');
+  const text = `RICHIESTA APPUNTAMENTO – OFTALMOLOGIA VETERINARIA\n\nNome: ${name}\nTelefono: ${phone}\nMessaggio: ${message}`;
+  window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 });
 
-// Filtri pagina “I nostri lavori”
+// Filtro strutture per provincia.
+const provinceTabs = document.querySelectorAll('.province-tab');
+const structureCards = document.querySelectorAll('.structure-card');
+provinceTabs.forEach(button => {
+  button.addEventListener('click', () => {
+    const province = button.dataset.provinceFilter;
+    provinceTabs.forEach(tab => {
+      const active = tab === button;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    structureCards.forEach(card => {
+      const match = card.dataset.province === province;
+      card.hidden = !match;
+    });
+    document.querySelector('#structuresList')?.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+// Stato iniziale: Napoli.
+if (provinceTabs.length) {
+  structureCards.forEach(card => { card.hidden = card.dataset.province !== 'napoli'; });
+}
+
+// Modulo appuntamento e precompilazione da struttura selezionata.
+const provinceSelect = document.querySelector('#provinceSelect');
+const structureSelect = document.querySelector('#structureSelect');
+
+function syncStructureOptions(){
+  if (!provinceSelect || !structureSelect) return;
+  const province = provinceSelect.value;
+  Array.from(structureSelect.options).forEach(option => {
+    if (!option.value) {
+      option.hidden = false;
+      return;
+    }
+    option.hidden = Boolean(province && option.dataset.province !== province);
+  });
+  const selected = structureSelect.selectedOptions[0];
+  if (selected?.value && selected.dataset.province !== province) structureSelect.value = '';
+}
+
+provinceSelect?.addEventListener('change', syncStructureOptions);
+structureSelect?.addEventListener('change', () => {
+  const province = structureSelect.selectedOptions[0]?.dataset.province;
+  if (province && provinceSelect) provinceSelect.value = province;
+  syncStructureOptions();
+});
+
+if (appointmentForm) {
+  const params = new URLSearchParams(window.location.search);
+  const requestedStructure = params.get('struttura');
+  const requestedProvince = params.get('provincia');
+  if (requestedProvince && provinceSelect) provinceSelect.value = requestedProvince;
+  syncStructureOptions();
+  if (requestedStructure && structureSelect) {
+    const match = Array.from(structureSelect.options).find(option => option.value === requestedStructure);
+    if (match) {
+      structureSelect.value = match.value;
+      if (provinceSelect && match.dataset.province) provinceSelect.value = match.dataset.province;
+      syncStructureOptions();
+    }
+  }
+
+  appointmentForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!appointmentForm.reportValidity()) return;
+    const data = new FormData(appointmentForm);
+    const value = key => (data.get(key) || '').toString().trim();
+    const text = [
+      '*RICHIESTA APPUNTAMENTO – OFTALMOLOGIA VETERINARIA*',
+      '',
+      `*Proprietario:* ${value('name')}`,
+      `*Telefono:* ${value('phone')}`,
+      `*Email:* ${value('email') || 'Non indicata'}`,
+      '',
+      `*Paziente:* ${value('petName')} (${value('petType')})`,
+      `*Provincia:* ${value('province')}`,
+      `*Struttura preferita:* ${value('structure')}`,
+      '',
+      '*Sintomi / richiesta:*',
+      value('message'),
+      '',
+      'Confermo di aver letto la Privacy Policy e autorizzo il trattamento dei dati per gestire questa richiesta.'
+    ].join('\n');
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+    window.location.href = url;
+  });
+}
+
+// Filtri pagina “I nostri lavori”.
 const filterButtons = document.querySelectorAll('.filter-btn');
 const caseCards = document.querySelectorAll('.case-card');
-
 filterButtons.forEach(button => {
   button.addEventListener('click', () => {
     const filter = button.dataset.filter || 'all';
     filterButtons.forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
-
     caseCards.forEach(card => {
       const match = filter === 'all' || card.dataset.category === filter;
       card.style.display = match ? '' : 'none';
@@ -89,19 +168,18 @@ filterButtons.forEach(button => {
   });
 });
 
-// Chiude le FAQ aperte quando l'utente ne apre un'altra: più pulito su mobile.
+// Una FAQ aperta alla volta.
 const faqDetails = document.querySelectorAll('.faq-list details');
 faqDetails.forEach(item => {
   item.addEventListener('toggle', () => {
     if (!item.open) return;
-    faqDetails.forEach(other => {
-      if (other !== item) other.open = false;
-    });
+    faqDetails.forEach(other => { if (other !== item) other.open = false; });
   });
 });
 
-// Scroll snap controllato: rotella mouse, swipe mobile, tastiera e puntini laterali.
+// Scroll snap controllato: disattivato nelle pagine modulo.
 (function initSnapScroll(){
+  if (document.body.classList.contains('no-snap')) return;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pages = Array.from(document.querySelectorAll('main > section, .site-footer'));
   if (pages.length < 2) return;
@@ -166,19 +244,23 @@ faqDetails.forEach(item => {
   }
 
   function sectionCanContinue(direction){
-    // Desktop: ogni colpo di rotella deve essere una pagina secca.
-    // Mobile/tablet: se una sezione è più lunga del viewport, lascia respirare il contenuto.
     if (window.innerWidth > 980) return false;
     const current = pages[getCurrentIndex()];
     if (!current) return false;
     const rect = current.getBoundingClientRect();
     const headerH = getHeaderHeight();
-    const viewportBottom = window.innerHeight;
-    const hasMoreBelow = rect.bottom > viewportBottom + 34;
+    const hasMoreBelow = rect.bottom > window.innerHeight + 34;
     const hasMoreAbove = rect.top < headerH - 34;
     const tallerThanViewport = rect.height > (window.innerHeight - headerH + 80);
     if (!tallerThanViewport) return false;
     return direction > 0 ? hasMoreBelow : hasMoreAbove;
+  }
+
+  function innerCanScroll(element, direction){
+    if (!element) return false;
+    const maxScroll = element.scrollHeight - element.clientHeight;
+    if (maxScroll <= 2) return false;
+    return direction > 0 ? element.scrollTop < maxScroll - 2 : element.scrollTop > 2;
   }
 
   window.addEventListener('scroll', () => {
@@ -189,8 +271,10 @@ faqDetails.forEach(item => {
     const delta = event.deltaY;
     if (Math.abs(delta) < 18) return;
     if (event.ctrlKey || event.metaKey || event.shiftKey) return;
-    if (event.target.closest('input, textarea, select, [data-no-snap]')) return;
+    if (event.target.closest('input, textarea, select')) return;
     const direction = delta > 0 ? 1 : -1;
+    const inner = event.target.closest('[data-no-snap]');
+    if (inner && innerCanScroll(inner, direction)) return;
     if (sectionCanContinue(direction)) return;
     event.preventDefault();
     if (locked) return;
@@ -208,10 +292,11 @@ faqDetails.forEach(item => {
     const diffY = touchStartY - touch.clientY;
     const diffX = touchStartX - touch.clientX;
     if (Math.abs(diffY) < 54 || Math.abs(diffY) < Math.abs(diffX) * 1.35) return;
-    if (event.target.closest('input, textarea, select, [data-no-snap]')) return;
+    if (event.target.closest('input, textarea, select')) return;
     const direction = diffY > 0 ? 1 : -1;
-    if (sectionCanContinue(direction)) return;
-    if (locked) return;
+    const inner = event.target.closest('[data-no-snap]');
+    if (inner && innerCanScroll(inner, direction)) return;
+    if (sectionCanContinue(direction) || locked) return;
     goToPage(getCurrentIndex() + direction);
   }, { passive:true });
 
@@ -223,8 +308,7 @@ faqDetails.forEach(item => {
     if (![...downKeys, ...upKeys].includes(event.code)) return;
     event.preventDefault();
     if (locked) return;
-    const direction = downKeys.includes(event.code) ? 1 : -1;
-    goToPage(getCurrentIndex() + direction);
+    goToPage(getCurrentIndex() + (downKeys.includes(event.code) ? 1 : -1));
   });
 
   setActive(getCurrentIndex());
