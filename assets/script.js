@@ -244,7 +244,6 @@ faqDetails.forEach(item => {
   }
 
   function sectionCanContinue(direction){
-    if (window.innerWidth > 980) return false;
     const current = pages[getCurrentIndex()];
     if (!current) return false;
     const rect = current.getBoundingClientRect();
@@ -268,6 +267,7 @@ faqDetails.forEach(item => {
   }, { passive:true });
 
   window.addEventListener('wheel', (event) => {
+    if (document.body.classList.contains('lightbox-open')) return;
     const delta = event.deltaY;
     if (Math.abs(delta) < 18) return;
     if (event.ctrlKey || event.metaKey || event.shiftKey) return;
@@ -288,6 +288,7 @@ faqDetails.forEach(item => {
   }, { passive:true });
 
   window.addEventListener('touchend', (event) => {
+    if (document.body.classList.contains('lightbox-open')) return;
     const touch = event.changedTouches[0];
     const diffY = touchStartY - touch.clientY;
     const diffX = touchStartX - touch.clientX;
@@ -312,4 +313,43 @@ faqDetails.forEach(item => {
   });
 
   setActive(getCurrentIndex());
+})();
+
+
+// Lightbox accessibile per fotografie cliniche e professionali.
+(function initImageLightbox(){
+  const triggers = document.querySelectorAll('[data-lightbox-src]');
+  if (!triggers.length || typeof HTMLDialogElement === 'undefined') return;
+
+  const dialog = document.createElement('dialog');
+  dialog.className = 'image-lightbox';
+  dialog.setAttribute('aria-label', 'Visualizzazione immagine ingrandita');
+  dialog.innerHTML = '<button class="image-lightbox-close" type="button" aria-label="Chiudi immagine">×</button><img alt="" />';
+  document.body.appendChild(dialog);
+  const image = dialog.querySelector('img');
+  const closeButton = dialog.querySelector('.image-lightbox-close');
+
+  const close = () => {
+    if (dialog.open) dialog.close();
+  };
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      image.src = trigger.dataset.lightboxSrc || '';
+      image.alt = trigger.dataset.lightboxAlt || trigger.querySelector('img')?.alt || 'Immagine ingrandita';
+      document.body.classList.add('lightbox-open');
+      dialog.showModal();
+    });
+  });
+
+  closeButton.addEventListener('click', close);
+  dialog.addEventListener('click', event => {
+    const rect = dialog.getBoundingClientRect();
+    const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+    if (outside) close();
+  });
+  dialog.addEventListener('close', () => {
+    document.body.classList.remove('lightbox-open');
+    image.removeAttribute('src');
+  });
 })();

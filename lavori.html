@@ -35,7 +35,7 @@
         <div class="reveal">
           <p class="eyebrow">Gallery professionale</p>
           <h1>I nostri lavori</h1>
-          <p class="lead">Una raccolta visiva per casi clinici, procedure chirurgiche e follow-up. Il layout è già pronto per ospitare le foto reali con un taglio premium: pulito, tecnico, elegante e facile da consultare.</p>
+          <p class="lead">Una selezione di immagini reali dedicate all’attività clinica, alle procedure chirurgiche e ai controlli nel tempo, presentate con un linguaggio sobrio e professionale.</p>
           <div class="hero-actions">
             <a class="btn primary" href="appuntamento.html">Fissa un appuntamento</a>
             <a class="btn ghost" href="index.html">Torna alla home</a>
@@ -47,8 +47,8 @@
           </div>
         </div>
         <aside class="gallery-note reveal delay-1">
-          <strong>Nota privacy</strong>
-          <p>Le immagini cliniche devono essere pubblicate solo con autorizzazione, senza dati sensibili visibili e con didascalie professionali. Meglio pochi casi forti, ben spiegati, che una galleria infinita buttata lì.</p>
+          <strong>Immagini cliniche reali</strong>
+          <p>Le fotografie sono pubblicate a scopo informativo e documentale, nel rispetto della privacy. Non sostituiscono una visita né consentono una diagnosi a distanza.</p>
         </aside>
       </div>
     </section>
@@ -57,8 +57,8 @@
       <div class="container">
         <div class="section-heading reveal">
           <p class="eyebrow">Archivio casi</p>
-          <h2>Gallery pronta per foto, categorie e descrizioni cliniche.</h2>
-          <p>Le immagini dei casi verranno organizzate con categorie, titoli chiari e descrizioni brevi, mantenendo un tono sobrio e professionale.</p>
+          <h2>Casi clinici, chirurgia e controlli documentati.</h2>
+          <p>Clicca su una fotografia per visualizzarla a schermo intero. Le descrizioni restano volutamente generali: ogni paziente richiede una valutazione individuale.</p>
         </div>
 
         <div class="gallery-toolbar reveal" aria-label="Filtri gallery">
@@ -70,48 +70,66 @@
 
         <div class="gallery-grid" id="galleryGrid">
           <article class="case-card reveal" data-category="clinica">
-            <div class="case-media">Foto da caricare<small>assets/lavori/diagnostica-01.webp</small></div>
-            <div class="case-body"><span>Clinica</span><h3>Valutazione oftalmologica</h3><p>Spazio dedicato a immagini diagnostiche, osservazioni cliniche e dettagli del percorso.</p></div>
+            <button class="case-media" type="button" data-lightbox-src="assets/lavori/caso-clinico-01.webp" data-lightbox-alt="Caso clinico oftalmologico veterinario: valutazione dell’area perioculare">
+              <img src="assets/lavori/caso-clinico-01.webp" alt="Valutazione clinica dell’area perioculare di un cane" loading="lazy" decoding="async" />
+              <span class="media-zoom">Ingrandisci</span>
+            </button>
+            <div class="case-body"><span>Clinica</span><h3>Valutazione dell’area perioculare</h3><p>Immagine selezionata nell’ambito di una visita specialistica e dell’inquadramento del caso.</p></div>
           </article>
-          <article class="case-card reveal delay-1" data-category="chirurgia">
-            <div class="case-media">Foto da caricare<small>assets/lavori/chirurgia-01.webp</small></div>
-            <div class="case-body"><span>Chirurgia</span><h3>Procedura chirurgica</h3><p>Area pensata per documentare procedure selezionate con descrizioni sobrie e professionali.</p></div>
+          <article class="case-card reveal delay-1" data-category="followup">
+            <button class="case-media" type="button" data-lightbox-src="assets/lavori/percorso-clinico-02.webp" data-lightbox-alt="Sequenza fotografica di un percorso clinico oftalmologico veterinario">
+              <img src="assets/lavori/percorso-clinico-02.webp" alt="Sequenza fotografica di un percorso clinico oftalmologico veterinario" loading="lazy" decoding="async" />
+              <span class="media-zoom">Ingrandisci</span>
+            </button>
+            <div class="case-body"><span>Follow-up</span><h3>Percorso clinico documentato</h3><p>Una sequenza fotografica utile a documentare le diverse fasi e i controlli del paziente.</p></div>
           </article>
-          <article class="case-card reveal delay-2" data-category="followup">
-            <div class="case-media">Foto da caricare<small>assets/lavori/followup-01.webp</small></div>
-            <div class="case-body"><span>Follow-up</span><h3>Controllo post trattamento</h3><p>Spazio per mostrare evoluzione, controlli e miglioramenti nel tempo.</p></div>
+          <article class="case-card reveal delay-2" data-category="clinica">
+            <button class="case-media" type="button" data-lightbox-src="assets/lavori/valutazione-oculare-03.webp" data-lightbox-alt="Esame clinico dell’occhio e degli annessi oculari di un cane">
+              <img src="assets/lavori/valutazione-oculare-03.webp" alt="Esame clinico dell’occhio e degli annessi oculari di un cane" loading="lazy" decoding="async" />
+              <span class="media-zoom">Ingrandisci</span>
+            </button>
+            <div class="case-body"><span>Clinica</span><h3>Esame dell’occhio e degli annessi</h3><p>Documentazione fotografica raccolta durante la valutazione oftalmologica specialistica.</p></div>
           </article>
           <article class="case-card reveal" data-category="chirurgia">
-            <div class="case-media">Foto da caricare<small>assets/lavori/chirurgia-02.webp</small></div>
-            <div class="case-body"><span>Chirurgia</span><h3>Caso operatorio selezionato</h3><p>Blocco pronto per immagini intraoperatorie o dettagli tecnici autorizzati.</p></div>
+            <button class="case-media" type="button" data-lightbox-src="assets/lavori/post-operatorio-04.webp" data-lightbox-alt="Controllo post-operatorio in oftalmologia veterinaria">
+              <img src="assets/lavori/post-operatorio-04.webp" alt="Controllo post-operatorio dell’area palpebrale di un cane" loading="lazy" decoding="async" />
+              <span class="media-zoom">Ingrandisci</span>
+            </button>
+            <div class="case-body"><span>Chirurgia</span><h3>Controllo post-operatorio</h3><p>Immagine clinica successiva a una procedura, inserita nel percorso di monitoraggio specialistico.</p></div>
           </article>
           <article class="case-card reveal delay-1" data-category="clinica">
-            <div class="case-media">Foto da caricare<small>assets/lavori/cornea-01.webp</small></div>
-            <div class="case-body"><span>Clinica</span><h3>Osservazione del segmento anteriore</h3><p>Didascalia breve, chiara, senza promesse mediche e senza sensazionalismo.</p></div>
+            <button class="case-media" type="button" data-lightbox-src="assets/lavori/valutazione-palpebrale-05.webp" data-lightbox-alt="Valutazione palpebrale in un paziente veterinario">
+              <img src="assets/lavori/valutazione-palpebrale-05.webp" alt="Valutazione palpebrale di un cane" loading="lazy" decoding="async" />
+              <span class="media-zoom">Ingrandisci</span>
+            </button>
+            <div class="case-body"><span>Clinica</span><h3>Valutazione palpebrale</h3><p>Osservazione clinica dell’area oculare per definire il percorso diagnostico più indicato.</p></div>
           </article>
           <article class="case-card reveal delay-2" data-category="followup">
-            <div class="case-media">Foto da caricare<small>assets/lavori/controllo-01.webp</small></div>
-            <div class="case-body"><span>Follow-up</span><h3>Monitoraggio clinico</h3><p>Area utile per raccontare la continuità del percorso e l’importanza dei controlli.</p></div>
+            <button class="case-media" type="button" data-lightbox-src="assets/lavori/follow-up-06.webp" data-lightbox-alt="Follow-up clinico oftalmologico veterinario">
+              <img src="assets/lavori/follow-up-06.webp" alt="Follow-up clinico dell’occhio di un cane" loading="lazy" decoding="async" />
+              <span class="media-zoom">Ingrandisci</span>
+            </button>
+            <div class="case-body"><span>Follow-up</span><h3>Monitoraggio clinico</h3><p>Controllo fotografico inserito nella continuità del percorso e nella valutazione nel tempo.</p></div>
           </article>
         </div>
 
         <div class="upload-guide reveal">
           <div class="guide-card">
-            <h3>Come caricheremo le foto</h3>
+            <h3>Come sono presentate</h3>
             <ul>
-              <li>Conversione in formato leggero WEBP.</li>
-              <li>Nome file pulito per SEO e ordine interno.</li>
-              <li>Categoria: Clinica, Chirurgia o Follow-up.</li>
-              <li>Didascalia professionale, breve e comprensibile.</li>
+              <li>Formato WEBP ottimizzato per caricamenti rapidi.</li>
+              <li>Categorie semplici: Clinica, Chirurgia e Follow-up.</li>
+              <li>Visualizzazione ingrandita con un clic.</li>
+              <li>Didascalie brevi, neutrali e comprensibili.</li>
             </ul>
           </div>
           <div class="guide-card">
-            <h3>Regola d’oro</h3>
+            <h3>Informazione responsabile</h3>
             <ul>
-              <li>Niente dati sensibili visibili.</li>
-              <li>Niente immagini inutilmente crude se non servono.</li>
-              <li>Pochi casi, ma forti e ben raccontati.</li>
-              <li>Obiettivo: autorevolezza, non shock value.</li>
+              <li>Nessun dato identificativo del proprietario.</li>
+              <li>Le immagini non consentono diagnosi a distanza.</li>
+              <li>Ogni caso clinico è differente.</li>
+              <li>Per una valutazione è necessario fissare una visita.</li>
             </ul>
           </div>
         </div>
