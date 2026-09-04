@@ -218,3 +218,30 @@ faqDetails.forEach(item => {
     image.removeAttribute('src');
   });
 })();
+
+// V2: evidenzia la sezione corrente nel menu senza modificare lo scroll naturale.
+(function initActiveNavigation(){
+  const links = [...document.querySelectorAll('.nav-menu a[href^="#"]')];
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  const map = new Map();
+  links.forEach(link => {
+    const id = link.getAttribute('href');
+    const section = id && document.querySelector(id);
+    if (section) map.set(section, link);
+  });
+  if (!map.size) return;
+  const obs = new IntersectionObserver(entries => {
+    const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio-a.intersectionRatio)[0];
+    if (!visible) return;
+    links.forEach(l => l.classList.remove('is-active'));
+    map.get(visible.target)?.classList.add('is-active');
+  }, {rootMargin:'-24% 0px -58% 0px', threshold:[0,.15,.35,.6]});
+  map.forEach((_,section) => obs.observe(section));
+})();
+
+// V2: Escape chiude il menu mobile.
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape') return;
+  navMenu?.classList.remove('open');
+  navToggle?.setAttribute('aria-expanded','false');
+});
