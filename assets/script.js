@@ -177,12 +177,18 @@ faqDetails.forEach(item => {
   });
 });
 
-// Scroll snap controllato: disattivato nelle pagine modulo.
+// Navigazione full-page: una rotella / uno swipe = una sezione completa.
+// Nelle pagine modulo resta volutamente disattivata.
 (function initSnapScroll(){
   if (document.body.classList.contains('no-snap')) return;
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pages = Array.from(document.querySelectorAll('main > section, .site-footer'));
   if (pages.length < 2) return;
+
+  const mobileMQ = window.matchMedia('(max-width: 980px)');
+  const header = document.querySelector('.site-header');
+  const getHeaderHeight = () => Math.round(header?.getBoundingClientRect().height || 0);
 
   document.documentElement.classList.add('snap-enabled');
   document.body.classList.add('snap-enabled');
@@ -191,12 +197,23 @@ faqDetails.forEach(item => {
     page.dataset.snapIndex = String(index);
   });
 
-  const header = document.querySelector('.site-header');
-  const getHeaderHeight = () => Math.round(header?.getBoundingClientRect().height || 0);
   let activeIndex = 0;
   let locked = false;
   let touchStartY = 0;
   let touchStartX = 0;
+  let touchStartTarget = null;
+
+  function setMobileMode(){
+    const on = mobileMQ.matches;
+    document.documentElement.classList.toggle('fullpage-mobile', on);
+    document.body.classList.toggle('fullpage-mobile', on);
+    if (on) {
+      // Un vecchio trascinamento orizzontale non deve lasciare il viewport fuori asse.
+      document.scrollingElement.scrollLeft = 0;
+    }
+  }
+  setMobileMode();
+  mobileMQ.addEventListener?.('change', setMobileMode);
 
   const dots = document.createElement('nav');
   dots.className = 'scroll-dots';
@@ -213,12 +230,11 @@ faqDetails.forEach(item => {
   document.body.appendChild(dots);
 
   function getCurrentIndex(){
-    const targetTop = getHeaderHeight();
+    const headerH = getHeaderHeight();
     let bestIndex = 0;
     let bestDistance = Infinity;
     pages.forEach((page, index) => {
-      const rect = page.getBoundingClientRect();
-      const distance = Math.abs(rect.top - targetTop);
+      const distance = Math.abs(page.getBoundingClientRect().top - headerH);
       if (distance < bestDistance) {
         bestDistance = distance;
         bestIndex = index;
@@ -232,27 +248,28 @@ faqDetails.forEach(item => {
     dotButtons.forEach((button, i) => button.classList.toggle('is-active', i === activeIndex));
   }
 
+  function targetTopFor(page){
+    return Math.max(0, Math.round(window.scrollY + page.getBoundingClientRect().top - getHeaderHeight()));
+  }
+
   function goToPage(index){
     const nextIndex = Math.max(0, Math.min(index, pages.length - 1));
     const page = pages[nextIndex];
-    if (!page) return;
-    const top = Math.max(0, window.scrollY + page.getBoundingClientRect().top - getHeaderHeight());
+    if (!page || (locked && nextIndex !== activeIndex)) return;
+
     locked = true;
     setActive(nextIndex);
-    window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
-    window.setTimeout(() => { locked = false; }, reduceMotion ? 120 : 780);
-  }
+    document.scrollingElement.scrollLeft = 0;
+    const top = targetTopFor(page);
+    window.scrollTo({ left: 0, top, behavior: reduceMotion ? 'auto' : 'smooth' });
 
-  function sectionCanContinue(direction){
-    const current = pages[getCurrentIndex()];
-    if (!current) return false;
-    const rect = current.getBoundingClientRect();
-    const headerH = getHeaderHeight();
-    const hasMoreBelow = rect.bottom > window.innerHeight + 34;
-    const hasMoreAbove = rect.top < headerH - 34;
-    const tallerThanViewport = rect.height > (window.innerHeight - headerH + 80);
-    if (!tallerThanViewport) return false;
-    return direction > 0 ? hasMoreBelow : hasMoreAbove;
+    // Correzione finale: evita di rimanere anche solo di pochi pixel tra due sezioni.
+    window.setTimeout(() => {
+      const exactTop = targetTopFor(page);
+      window.scrollTo({ left: 0, top: exactTop, behavior: 'auto' });
+      document.scrollingElement.scrollLeft = 0;
+      locked = false;
+    }, reduceMotion ? 80 : 560);
   }
 
   function innerCanScroll(element, direction){
@@ -262,43 +279,67 @@ faqDetails.forEach(item => {
     return direction > 0 ? element.scrollTop < maxScroll - 2 : element.scrollTop > 2;
   }
 
+  // In mobile la posizione attiva è governata dal full-page controller, non dallo scroll nativo.
   window.addEventListener('scroll', () => {
-    if (!locked) setActive(getCurrentIndex());
+    if (window.scrollX !== 0) document.scrollingElement.scrollLeft = 0;
+    if (!locked && !mobileMQ.matches) setActive(getCurrentIndex());
   }, { passive:true });
 
   window.addEventListener('wheel', (event) => {
     if (document.body.classList.contains('lightbox-open')) return;
-    const delta = event.deltaY;
-    if (Math.abs(delta) < 18) return;
-    if (event.ctrlKey || event.metaKey || event.shiftKey) return;
+    if (Math.abs(event.deltaY) < 18 || event.ctrlKey || event.metaKey || event.shiftKey) return;
     if (event.target.closest('input, textarea, select')) return;
-    const direction = delta > 0 ? 1 : -1;
+
+    const direction = event.deltaY > 0 ? 1 : -1;
     const inner = event.target.closest('[data-no-snap]');
     if (inner && innerCanScroll(inner, direction)) return;
-    if (sectionCanContinue(direction)) return;
+
     event.preventDefault();
     if (locked) return;
-    goToPage(getCurrentIndex() + direction);
+    if (!mobileMQ.matches) setActive(getCurrentIndex());
+    goToPage(activeIndex + direction);
   }, { passive:false });
 
   window.addEventListener('touchstart', (event) => {
+    if (document.body.classList.contains('lightbox-open')) return;
     const touch = event.changedTouches[0];
     touchStartY = touch.clientY;
     touchStartX = touch.clientX;
+    touchStartTarget = event.target;
+    if (!locked) setActive(getCurrentIndex());
   }, { passive:true });
 
-  window.addEventListener('touchend', (event) => {
-    if (document.body.classList.contains('lightbox-open')) return;
+  window.addEventListener('touchmove', (event) => {
+    if (!mobileMQ.matches || document.body.classList.contains('lightbox-open')) return;
+    if (!touchStartTarget || touchStartTarget.closest('input, textarea, select')) return;
+
     const touch = event.changedTouches[0];
     const diffY = touchStartY - touch.clientY;
     const diffX = touchStartX - touch.clientX;
-    if (Math.abs(diffY) < 54 || Math.abs(diffY) < Math.abs(diffX) * 1.35) return;
-    if (event.target.closest('input, textarea, select')) return;
+    if (Math.abs(diffY) <= Math.abs(diffX) || Math.abs(diffY) < 6) return;
+
     const direction = diffY > 0 ? 1 : -1;
-    const inner = event.target.closest('[data-no-snap]');
+    const inner = touchStartTarget.closest('[data-no-snap]');
     if (inner && innerCanScroll(inner, direction)) return;
-    if (sectionCanContinue(direction) || locked) return;
-    goToPage(getCurrentIndex() + direction);
+
+    // Impedisce fisicamente al browser di fermarsi a metà pagina.
+    event.preventDefault();
+  }, { passive:false });
+
+  window.addEventListener('touchend', (event) => {
+    if (!mobileMQ.matches || document.body.classList.contains('lightbox-open')) return;
+    if (!touchStartTarget || touchStartTarget.closest('input, textarea, select')) return;
+
+    const touch = event.changedTouches[0];
+    const diffY = touchStartY - touch.clientY;
+    const diffX = touchStartX - touch.clientX;
+    touchStartTarget = null;
+
+    // Swipe verticale deliberato: basta un gesto breve, ma non un semplice tap.
+    if (Math.abs(diffY) < 28 || Math.abs(diffY) <= Math.abs(diffX) * 1.08) return;
+    const direction = diffY > 0 ? 1 : -1;
+    if (locked) return;
+    goToPage(activeIndex + direction);
   }, { passive:true });
 
   window.addEventListener('keydown', (event) => {
@@ -309,10 +350,22 @@ faqDetails.forEach(item => {
     if (![...downKeys, ...upKeys].includes(event.code)) return;
     event.preventDefault();
     if (locked) return;
-    goToPage(getCurrentIndex() + (downKeys.includes(event.code) ? 1 : -1));
+    if (!mobileMQ.matches) setActive(getCurrentIndex());
+    goToPage(activeIndex + (downKeys.includes(event.code) ? 1 : -1));
   });
 
+  window.addEventListener('resize', () => {
+    setMobileMode();
+    if (mobileMQ.matches && !locked) {
+      window.setTimeout(() => goToPage(activeIndex), 100);
+    }
+  }, { passive:true });
+
   setActive(getCurrentIndex());
+  window.setTimeout(() => {
+    document.scrollingElement.scrollLeft = 0;
+    if (mobileMQ.matches) goToPage(activeIndex);
+  }, 80);
 })();
 
 
