@@ -1225,3 +1225,75 @@ main, main>section, .site-footer{width:100%;max-width:100%;min-width:0;overflow-
 /* Anchor navigation sotto header sticky, senza salti full-page. */
 main > section[id]{scroll-margin-top:96px}
 @media (max-width:980px){main > section[id]{scroll-margin-top:84px}}
+
+/* =========================================================
+   Profilo mobile - correzione layout 04/09/2026
+   Griglia esplicita: niente colonne fantasma o foto tagliate.
+   ========================================================= */
+@media (max-width:680px){
+  #specialista .section-intro h2{
+    font-size:clamp(30px,8.6vw,36px)!important;
+    line-height:1.04!important;
+    letter-spacing:-.04em!important;
+  }
+  #specialista .profile-photo-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    grid-template-rows:320px 155px 185px!important;
+    gap:12px!important;
+    width:100%!important;
+    height:auto!important;
+    margin:22px 0 0!important;
+    overflow:visible!important;
+  }
+  #specialista .profile-photo{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    margin:0!important;
+    border-radius:20px!important;
+  }
+  #specialista .profile-photo-main{
+    grid-column:1 / -1!important;
+    grid-row:1!important;
+  }
+  #specialista .profile-photo-clinica{
+    grid-column:1!important;
+    grid-row:2!important;
+  }
+  #specialista .profile-photo-formazione{
+    grid-column:2!important;
+    grid-row:2!important;
+  }
+  #specialista .profile-photo-divulgazione{
+    grid-column:1 / -1!important;
+    grid-row:3!important;
+  }
+  #specialista .profile-photo-main img{
+    object-position:center 24%!important;
+  }
+  #specialista .profile-photo-clinica img{
+    object-position:center 38%!important;
+  }
+  #specialista .profile-photo-formazione img{
+    object-position:center 52%!important;
+  }
+  #specialista .profile-photo-divulgazione img{
+    object-position:center 48%!important;
+  }
+  #specialista .profile-photo span{
+    left:14px!important;
+    right:14px!important;
+    bottom:12px!important;
+    font-size:11px!important;
+    line-height:1.18!important;
+  }
+  #specialista .profile-photo-main span{
+    font-size:13px!important;
+  }
+  #specialista .content-card{
+    margin-top:4px!important;
+  }
+}
