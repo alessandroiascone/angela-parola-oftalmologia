@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alessandroiascone.github.io/angela-parola-oftalmologia/sitemap.xml
