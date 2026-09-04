@@ -26,3 +26,25 @@ Quando verrà collegato il dominio definitivo (es. angelaparola.it), sostituire 
 Contatti configurati:
 Telefono/WhatsApp: +39 346 776 2594
 Email: angela.parola@libero.it
+
+
+V2.1 (04/09/2026):
+- FAQ ridotte a 3.
+- Sillabazione automatica rimossa: nessuna parola spezzata con trattino.
+- Anteprime lavori con una sola etichetta.
+- Rifinitura 3D/depth sobria su card e CTA.
+- Ottimizzazioni tipografiche mobile.
+
+
+V2.2 (04/09/2026):
+- check completo della versione pubblica e del pacchetto V2.1;
+- Privacy Policy riscritta sulla base del funzionamento reale del sito (form client-side -> WhatsApp, GitHub Pages, nessun analytics nel codice);
+- tono formazione reso più autorevole;
+- focus e micro-interazioni accessibili;
+- effetti depth limitati ai dispositivi con hover, nessun 3D invasivo su mobile;
+- ottimizzata l’immagine clinica più pesante;
+- aggiunte etichette accessibili ai pulsanti WhatsApp.
+
+Nota: quando verrà collegato il dominio definitivo, aggiornare canonical, Open Graph, sitemap e robots.txt.
+
+V2.3: migliorata la tipografia mobile nelle card Metodo e nei componenti stretti, eliminando spaziature eccessive causate dalla giustificazione.
