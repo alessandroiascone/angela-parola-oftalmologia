@@ -1908,3 +1908,120 @@ h1,h2,h3{ text-wrap:balance; }
   .works-image-preview .work-thumb>span strong{font-size:15px!important}
   .appointment-cta h2{font-size:clamp(30px,8.7vw,38px)!important}
 }
+
+
+/* =========================================================
+   V2.2 Final polish: sobrio, accessibile, senza effetti invasivi
+   ========================================================= */
+::selection{background:rgba(50,168,191,.28);color:var(--ink)}
+html{-webkit-tap-highlight-color:transparent}
+.btn,.nav-menu a,.structure-card a,.filter-btn,.floating-whatsapp{touch-action:manipulation}
+.btn:active,.structure-card a:active,.filter-btn:active{transform:scale(.985)}
+
+/* Focus realmente visibile anche da tastiera. */
+:where(a,button,input,select,textarea,summary):focus-visible{
+  outline:3px solid rgba(50,168,191,.48)!important;
+  outline-offset:3px!important;
+}
+
+/* Effetto depth soltanto dove esiste un vero hover: niente giostre su smartphone. */
+@media (hover:hover) and (pointer:fine){
+  .service-card,.audience-card,.content-card,.case-card,.structure-card{
+    transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease;
+  }
+  .service-card:hover,.audience-card:hover,.structure-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 22px 54px rgba(7,31,43,.13);
+    border-color:rgba(14,113,135,.18);
+  }
+}
+
+/* Privacy definitiva: leggibile e coerente con il resto del sito. */
+.privacy-main{background:linear-gradient(180deg,#f9ffff 0%,#fffaf2 100%)}
+.privacy-shell{display:grid;grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);gap:48px;align-items:start}
+.privacy-intro{position:sticky;top:126px}
+.privacy-intro h1{font-size:clamp(48px,6vw,78px);line-height:.94;margin-bottom:22px}
+.privacy-updated{display:inline-flex;margin-top:14px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.75);color:var(--muted);font-size:12px;font-weight:850}
+.privacy-content{padding:38px}
+.privacy-content section+section{border-top:1px solid var(--line);padding-top:24px;margin-top:24px}
+.privacy-content h2{font-size:22px;line-height:1.2;letter-spacing:-.025em;margin-bottom:10px}
+.privacy-content p{font-size:15.5px;line-height:1.72;margin-bottom:10px}
+.privacy-content a:not(.btn){color:var(--teal);text-decoration:underline;text-underline-offset:3px}
+.privacy-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.privacy-legal-note{margin-top:22px!important;padding:16px 18px;border-radius:18px;background:var(--mint);border:1px solid rgba(14,113,135,.12);font-size:12.5px!important;color:#476169!important}
+.privacy-nav{margin-left:auto}
+
+@media (max-width:860px){
+  .privacy-shell{grid-template-columns:1fr;gap:24px}
+  .privacy-intro{position:static}
+  .privacy-content{padding:26px}
+}
+@media (max-width:680px){
+  .privacy-intro h1{font-size:48px}
+  .privacy-content{padding:22px;border-radius:24px}
+  .privacy-content h2{font-size:19px}
+  .privacy-content p{font-size:14.5px;line-height:1.65}
+  .privacy-actions .btn{width:100%}
+}
+
+/* =========================================================
+   V2.3 — Mobile typography balance
+   Nei riquadri stretti il testo non viene giustificato: evita
+   spazi enormi tra le parole e mantiene una lettura naturale.
+   ========================================================= */
+@media (max-width:680px){
+  #percorso .process-grid{
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+  }
+
+  #percorso .process-step{
+    min-height:0!important;
+    height:auto!important;
+    padding:22px!important;
+    border-radius:24px!important;
+  }
+
+  #percorso .process-step b{
+    width:42px!important;
+    height:42px!important;
+    margin-bottom:18px!important;
+    font-size:16px!important;
+  }
+
+  #percorso .process-step h3{
+    margin-bottom:10px!important;
+    font-size:21px!important;
+    line-height:1.15!important;
+  }
+
+  #percorso .process-step p{
+    margin:0!important;
+    font-size:16px!important;
+    line-height:1.55!important;
+    letter-spacing:0!important;
+    word-spacing:0!important;
+    text-align:left!important;
+    text-align-last:left!important;
+    text-justify:auto!important;
+    hyphens:none!important;
+    -webkit-hyphens:none!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+    text-wrap:pretty!important;
+  }
+
+  /* Nei componenti stretti la giustificazione crea 'buchi'.
+     Manteniamo giustificati i paragrafi ampi, ma allineiamo a sinistra
+     le card compatte per un risultato più editoriale e premium. */
+  .service-card p,
+  .faq-list details p,
+  .case-body p,
+  .gallery-note p,
+  .guide-card li{
+    text-align:left!important;
+    text-align-last:left!important;
+    text-justify:auto!important;
+    word-spacing:0!important;
+  }
+}
