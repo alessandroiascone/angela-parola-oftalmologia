@@ -1297,3 +1297,71 @@ main > section[id]{scroll-margin-top:96px}
     margin-top:4px!important;
   }
 }
+
+/* =========================================================
+   Tipografia: testi discorsivi giustificati
+   Manteniamo titoli, menu, pulsanti e label allineati normalmente
+   per non compromettere leggibilità e gerarchia visiva.
+   ========================================================= */
+body p,
+body li,
+body .lead,
+body .content-card p,
+body .audience-card p,
+body .audience-card li,
+body .service-card p,
+body .process-step p,
+body .works-copy p,
+body .case-body p,
+body .gallery-note p,
+body .guide-card li,
+body .faq-list details p,
+body .cta-card p,
+body .site-footer p,
+body .appointment-copy p,
+body .form-microcopy,
+body .structures-note {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+/* Elementi brevi/interattivi: niente giustificazione */
+body h1,
+body h2,
+body h3,
+body .eyebrow,
+body .btn,
+body button,
+body label,
+body summary,
+body .nav-menu,
+body .brand-copy,
+body .hero-strip,
+body .trust-row,
+body .status-pill,
+body .structure-copy,
+body .province-tabs,
+body .contact-points,
+body .footer-brand,
+body .powered-by,
+body .profile-photo span,
+body .case-body span {
+  text-align: initial;
+  hyphens: none;
+}
+
+@media (max-width:680px){
+  body p,
+  body li,
+  body .lead,
+  body .form-microcopy,
+  body .structures-note{
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+}
