@@ -13,7 +13,7 @@ Novità V2:
 - scroll naturale: nessuno snap automatico
 
 URL attualmente configurato nei meta SEO:
-https://alessandroiascone.github.io/angela-parola-oftalmologia/
+https://dottangelaparola.com/
 
 Quando verrà collegato il dominio definitivo (es. angelaparola.it), sostituire questo URL in:
 - index.html
