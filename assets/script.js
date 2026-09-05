@@ -59,15 +59,28 @@ if ('IntersectionObserver' in window) {
 const provinceTabs=document.querySelectorAll('.province-tab');
 const structureCards=document.querySelectorAll('.structure-card');
 function showProvince(province){
+  const selected=String(province||'').trim().toLowerCase();
   provinceTabs.forEach(tab=>{
-    const active=tab.dataset.provinceFilter===province;
+    const active=String(tab.dataset.provinceFilter||'').trim().toLowerCase()===selected;
     tab.classList.toggle('active',active);
     tab.setAttribute('aria-selected',String(active));
   });
-  structureCards.forEach(card=>{ card.hidden=card.dataset.province!==province; });
+  structureCards.forEach(card=>{
+    const match=String(card.dataset.province||'').trim().toLowerCase()===selected;
+    card.hidden=!match;
+    // Il CSS delle card usa display:grid: forziamo display:none sui non pertinenti
+    // così il filtro funziona in modo affidabile su tutti i browser.
+    if(match){
+      card.style.removeProperty('display');
+      card.removeAttribute('aria-hidden');
+    }else{
+      card.style.setProperty('display','none','important');
+      card.setAttribute('aria-hidden','true');
+    }
+  });
 }
 provinceTabs.forEach(tab=>tab.addEventListener('click',()=>showProvince(tab.dataset.provinceFilter)));
-if(provinceTabs.length) showProvince('napoli');
+if(provinceTabs.length) showProvince(provinceTabs[0].dataset.provinceFilter||'napoli');
 
 // Modulo appuntamento: provincia, struttura e precompilazione da URL.
 const appointmentForm=document.querySelector('#appointmentForm');
@@ -135,7 +148,12 @@ const caseCards=document.querySelectorAll('.case-card');
 filterButtons.forEach(button=>button.addEventListener('click',()=>{
   const filter=button.dataset.filter || 'all';
   filterButtons.forEach(btn=>btn.classList.toggle('active',btn===button));
-  caseCards.forEach(card=>{ card.hidden=filter!=='all' && card.dataset.category!==filter; });
+  caseCards.forEach(card=>{
+    const match=filter==='all' || card.dataset.category===filter;
+    card.hidden=!match;
+    if(match) card.style.removeProperty('display');
+    else card.style.setProperty('display','none','important');
+  });
 }));
 
 // FAQ: una risposta aperta alla volta.

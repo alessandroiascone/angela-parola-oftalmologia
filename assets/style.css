@@ -21,6 +21,9 @@
   --container:min(1180px,calc(100% - 40px));
   --header-h:84px;
 }
+/* Native hidden attribute must always win over component display rules. */
+[hidden]{display:none!important}
+
 
 *{box-sizing:border-box}
 html{
